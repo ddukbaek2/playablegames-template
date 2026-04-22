@@ -1,7 +1,7 @@
 //==============================================================================
 // 포함 모듈 목록.
 //==============================================================================
-import { submitGameCenterLeaderBoardScore, openGameCenterLeaderboard } from '@apps-in-toss/web-framework';
+import { submitGameCenterLeaderBoardScore, openGameCenterLeaderboard } from "@apps-in-toss/web-framework";
 
 
 //==============================================================================
@@ -16,14 +16,14 @@ export class LeaderboardProvider {
         try {
             const result = await submitGameCenterLeaderBoardScore({ score });
             if (result) {
-                console.log('[LeaderboardProvider] submitScore statusCode:', result.statusCode);
+                console.log("[LeaderboardProvider] submitScore statusCode:", result.statusCode);
             }
             else {
-                console.warn('[LeaderboardProvider] submitScore: 지원하지 않는 앱 버전.');
+                console.warn("[LeaderboardProvider] submitScore: 지원하지 않는 앱 버전.");
             }
             return result;
         } catch (error) {
-            console.error('[LeaderboardProvider] submitScore 예외:', error);
+            console.error("[LeaderboardProvider] submitScore 예외:", error);
             return undefined;
         }
     }
@@ -35,7 +35,7 @@ export class LeaderboardProvider {
         try {
             await openGameCenterLeaderboard();
         } catch (error) {
-            console.error('[LeaderboardProvider] open 예외:', error);
+            console.error("[LeaderboardProvider] open 예외:", error);
         }
     }
 }

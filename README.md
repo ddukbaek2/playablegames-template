@@ -39,11 +39,11 @@ npm install
 
 ### 앱인토스 (`platforms/appintoss/granite.config.ts`)
 ```ts
-appName: '<appName>',              // 앱인토스에서 부여받은 appName
+appName: "<appName>",              // 앱인토스에서 부여받은 appName
 brand: {
-    displayName: '<displayName>',  // 사용자에게 보일 앱 이름
-    primaryColor: '#3182F6',
-    icon: '<icon>',                // 아이콘 이미지 경로 (예: 'assets/icons/app_icon.png')
+    displayName: "<displayName>",  // 사용자에게 보일 앱 이름
+    primaryColor: "#3182F6",
+    icon: "<icon>",                // 아이콘 이미지 경로 (예: "assets/icons/app_icon.png")
 },
 ```
 
@@ -57,8 +57,9 @@ brand: {
 
 원스토어는 추가로:
 - Android SDK + JDK 17+ 설치
-- `cd platforms/onestore && npx cap add android` (최초 1회)
 - 서명 키스토어 + `android/app/keystore.properties` 배치
+
+> `android/` 스캐폴드는 `build:aab:onestore` / `build:apk:onestore` 첫 실행 시 자동으로 `npx cap add android` 가 수행되어 생성된다. 단, 이때 `capacitor.config.json` 의 `<appId>` / `<appName>` 이 이미 실제 값으로 교체돼 있어야 한다(플레이스홀더가 남아있으면 `validate` 가 먼저 중단시킴).
 
 
 ## 개발 서버 (Live Server)

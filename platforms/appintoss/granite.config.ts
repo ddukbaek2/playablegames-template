@@ -1,20 +1,20 @@
-import { defineConfig } from '@apps-in-toss/web-framework/config';
+import { defineConfig } from "@apps-in-toss/web-framework/config";
 
 export default defineConfig({
-	appName: '<appName>',
+	appName: "<appName>",
 	brand: {
-		displayName: '<displayName>',
-		primaryColor: '#3182F6',
-		icon: '<icon>',
+		displayName: "<displayName>",
+		primaryColor: "#3182F6",
+		icon: "<icon>",
 	},
 	web: {
-		host: '127.0.0.1',
+		host: "127.0.0.1",
 		port: 5173,
 		commands: {
-			dev: 'vite --host',
-			build: 'vite build --outDir dist/web',
+			dev: "vite --host",
+			build: "vite build --outDir dist/web",
 		},
 	},
 	permissions: [],
-	outdir: 'dist',
+	outdir: "dist",
 });

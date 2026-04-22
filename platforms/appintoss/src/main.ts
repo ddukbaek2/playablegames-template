@@ -1,8 +1,8 @@
 //==============================================================================
 // 포함 모듈 목록.
 //==============================================================================
-import { AdvertisementProvider } from './advertiseprovider.ts';
-import { LeaderboardProvider } from './leaderboardprovider.ts';
+import { AdvertisementProvider } from "./advertiseprovider.ts";
+import { LeaderboardProvider } from "./leaderboardprovider.ts";
 
 
 //==============================================================================
@@ -26,14 +26,14 @@ if (import.meta.env.DEV) {
     try {
         let on = false;
         const params = new URLSearchParams(location.search);
-        const q = params.get('eruda');
-        if (q === '1') { localStorage.setItem('eruda', '1'); on = true; }
-        else if (q === '0') { localStorage.removeItem('eruda'); on = false; }
-        else { on = localStorage.getItem('eruda') === '1'; }
+        const q = params.get("eruda");
+        if (q === "1") { localStorage.setItem("eruda", "1"); on = true; }
+        else if (q === "0") { localStorage.removeItem("eruda"); on = false; }
+        else { on = localStorage.getItem("eruda") === "1"; }
 
         if (on) {
-            const s = document.createElement('script');
-            s.src = 'https://cdn.jsdelivr.net/npm/eruda';
+            const s = document.createElement("script");
+            s.src = "https://cdn.jsdelivr.net/npm/eruda";
             s.onload = (): void => {
                 const w = window as unknown as { eruda?: { init: () => void } };
                 if (w.eruda) w.eruda.init();
@@ -41,6 +41,6 @@ if (import.meta.env.DEV) {
             document.head.appendChild(s);
         }
     } catch (e) {
-        console.warn('[eruda] toggle failed:', e);
+        console.warn("[eruda] toggle failed:", e);
     }
 }

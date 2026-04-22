@@ -1,7 +1,7 @@
 //==============================================================================
 // 포함 모듈 목록.
 //==============================================================================
-import { loadFullScreenAd, showFullScreenAd, type LoadFullScreenAdEvent, type ShowFullScreenAdEvent } from '@apps-in-toss/web-framework';
+import { loadFullScreenAd, showFullScreenAd, type LoadFullScreenAdEvent, type ShowFullScreenAdEvent } from "@apps-in-toss/web-framework";
 
 
 //==============================================================================
@@ -29,16 +29,16 @@ export class AdvertisementProvider {
             loadFullScreenAd({
                 options: { adGroupId },
                 onEvent: (data: LoadFullScreenAdEvent): void => {
-                    console.log('[AdvertisementProvider] preload event:', data.type);
-                    if (data.type === 'loaded')
+                    console.log("[AdvertisementProvider] preload event:", data.type);
+                    if (data.type === "loaded")
                         this.adReady = true;
                 },
                 onError: (error: Error): void => {
-                    console.error('[AdvertisementProvider] preload onError:', error);
+                    console.error("[AdvertisementProvider] preload onError:", error);
                 },
             });
         } catch (error) {
-            console.warn('[AdvertisementProvider] preload 호출 예외 (앱인토스 환경 아님?):', error);
+            console.warn("[AdvertisementProvider] preload 호출 예외 (앱인토스 환경 아님?):", error);
         }
     }
 
@@ -55,7 +55,7 @@ export class AdvertisementProvider {
     show(): Promise<boolean> {
         return new Promise((resolve) => {
             if (this.adGroupId == null || !this.adReady || this.adShowing) {
-                console.warn('[AdvertisementProvider] show 호출 차단: ',
+                console.warn("[AdvertisementProvider] show 호출 차단: ",
                     { hasId: this.adGroupId != null, ready: this.adReady, showing: this.adShowing });
                 resolve(false);
                 return;
@@ -67,10 +67,10 @@ export class AdvertisementProvider {
                 showFullScreenAd({
                     options: { adGroupId },
                     onEvent: (data: ShowFullScreenAdEvent): void => {
-                        console.log('[AdvertisementProvider] show event:', data.type);
-                        if (data.type === 'userEarnedReward')
+                        console.log("[AdvertisementProvider] show event:", data.type);
+                        if (data.type === "userEarnedReward")
                             resolve(true);
-                        if (data.type === 'dismissed') {
+                        if (data.type === "dismissed") {
                             this.adShowing = false;
                             resolve(false);
                             this.preload(adGroupId);
@@ -79,13 +79,13 @@ export class AdvertisementProvider {
                     onError: (error: Error): void => {
                         this.adShowing = false;
                         resolve(false);
-                        console.error('[AdvertisementProvider] show onError:', error);
+                        console.error("[AdvertisementProvider] show onError:", error);
                     },
                 });
             } catch (error) {
                 this.adShowing = false;
                 resolve(false);
-                console.warn('[AdvertisementProvider] show 호출 예외 (앱인토스 환경 아님?):', error);
+                console.warn("[AdvertisementProvider] show 호출 예외 (앱인토스 환경 아님?):", error);
             }
         });
     }

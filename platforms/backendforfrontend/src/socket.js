@@ -1,4 +1,4 @@
-const { WebSocketServer } = require('ws');
+const { WebSocketServer } = require("ws");
 
 
 //==============================================================================
@@ -13,12 +13,12 @@ class Socket {
     /** @type {WebSocketServer} */
     #wss;
 
-    /** @type {Set<import('ws').WebSocket>} */
+    /** @type {Set<import("ws").WebSocket>} */
     #clients;
 
     /**
-     * @param {import('http').Server} server - HTTP 서버 인스턴스.
-     * @param {Set<import('ws').WebSocket>} clients - 연결된 WebSocket 클라이언트 집합.
+     * @param {import("http").Server} server - HTTP 서버 인스턴스.
+     * @param {Set<import("ws").WebSocket>} clients - 연결된 WebSocket 클라이언트 집합.
      */
     constructor(server, clients) {
         this.#wss = new WebSocketServer({ server });
@@ -36,7 +36,7 @@ class Socket {
 
     /**
      * 연결된 WebSocket 클라이언트 집합을 반환한다.
-     * @returns {Set<import('ws').WebSocket>}
+     * @returns {Set<import("ws").WebSocket>}
      */
     getClients() {
         return this.#clients;
@@ -47,15 +47,15 @@ class Socket {
      */
     setup() {
         const wss = this.getWss();
-        wss.on('connection', (ws) => {
+        wss.on("connection", (ws) => {
             const clients = this.getClients();
             clients.add(ws);
             console.log(`[연결] 클라이언트 접속 (총 ${clients.size}명)`);
-            ws.on('message', (message) => {
+            ws.on("message", (message) => {
                 console.log(`[수신] ${message}`);
                 ws.send(message);
             });
-            ws.on('close', () => {
+            ws.on("close", () => {
                 clients.delete(ws);
                 console.log(`[해제] 클라이언트 종료 (총 ${clients.size}명)`);
             });

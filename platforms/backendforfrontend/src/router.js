@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 
 
 //==============================================================================
@@ -13,11 +13,11 @@ class Router {
     /** @type {express.Router} */
     #router;
 
-    /** @type {Set<import('ws').WebSocket>} */
+    /** @type {Set<import("ws").WebSocket>} */
     #clients;
 
     /**
-     * @param {Set<import('ws').WebSocket>} clients - 연결된 WebSocket 클라이언트 집합.
+     * @param {Set<import("ws").WebSocket>} clients - 연결된 WebSocket 클라이언트 집합.
      */
     constructor(clients) {
         this.#router = express.Router();
@@ -35,7 +35,7 @@ class Router {
 
     /**
      * 연결된 WebSocket 클라이언트 집합을 반환한다.
-     * @returns {Set<import('ws').WebSocket>}
+     * @returns {Set<import("ws").WebSocket>}
      */
     getClients() {
         return this.#clients;
@@ -46,7 +46,7 @@ class Router {
      */
     setup() {
         const router = this.getRouter();
-        router.post('/api/event', (req, res) => {
+        router.post("/api/event", (req, res) => {
             const payload = JSON.stringify(req.body);
             const clients = this.getClients();
             clients.forEach(ws => ws.send(payload));
