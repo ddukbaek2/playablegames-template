@@ -12,6 +12,7 @@ platforms/onestore/android/.gradle/
 platforms/onestore/android/local.properties
 platforms/onestore/*.keystore
 platforms/onestore/keystore.properties
+platforms/backendforfrontend/public/
 
 # Logs
 logs

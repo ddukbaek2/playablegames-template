@@ -13,6 +13,12 @@
 			"type": "node-terminal",
 			"request": "launch",
 			"command": "npm run build && npm run dev:ait"
+		},
+		{
+			"name": "Debug Local BFF Server",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm run build && npm run dev:bff"
 		}
 	]
 }

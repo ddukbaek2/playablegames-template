@@ -7,9 +7,8 @@
 		"**/.DS_Store": true,
 		"**/node_modules": true,
 		"**/LICENSE": true,
-		"**/CLAUDE.md": false,
-		"**/package-lock.json": false,
-		"**/package.json": false,
+		"**/CLAUDE.md": true,
+		"**/package-lock.json": true,
 	},
 
 	"search.exclude": {

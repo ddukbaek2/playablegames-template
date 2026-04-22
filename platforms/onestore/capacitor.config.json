@@ -1,6 +1,6 @@
 {
-	"appId": "com.example.myplayableapp",
-	"appName": "My Playable App",
+	"appId": "<appId>",
+	"appName": "<appName>",
 	"webDir": "www",
 	"android": {
 		"allowMixedContent": false,

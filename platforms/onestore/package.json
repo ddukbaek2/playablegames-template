@@ -3,7 +3,8 @@
 	"private": true,
 	"version": "0.0.0",
 	"scripts": {
-		"stage": "node ../../libs/vanilla.js/tools/project.cjs stage --source ../../build/web --destination www",
+		"validate": "node tools/validate.cjs",
+		"stage": "npm run validate && node ../../libs/vanilla.js/tools/project.cjs stage --source ../../build/web --destination www",
 		"sync": "npm run stage && cap sync android",
 		"open": "cap open android",
 		"build:aab": "node tools/buildaab.cjs",
