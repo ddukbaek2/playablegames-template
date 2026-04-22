@@ -40,13 +40,6 @@
 				"isDefault": true
 			},
 			"problemMatcher": []
-		},
-		{
-			"label": "Check Assets",
-			"type": "shell",
-			"command": "npm run check",
-			"group": "none",
-			"problemMatcher": []
 		}
 	]
 }

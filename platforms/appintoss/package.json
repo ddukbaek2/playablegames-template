@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"stage": "node tools/stage.cjs",
+		"stage": "node ../../libs/vanilla.js/tools/project.cjs stage --source ../../build/web --destination public --skip index.html",
 		"dev": "npm run stage && granite dev",
 		"build": "npm run stage && ait build",
 		"preview": "vite preview",

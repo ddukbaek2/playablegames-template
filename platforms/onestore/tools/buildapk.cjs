@@ -15,19 +15,14 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 
 const platformRoot = path.resolve(__dirname, "..");
+const projectRoot = path.resolve(platformRoot, "..", "..");
+const { stage } = require(path.join(projectRoot, "libs", "vanilla.js", "tools", "project.cjs"));
 
 const isWindows = process.platform === "win32";
 
 let exitCode = 0;
 try {
-	const stageResult = spawnSync(process.execPath, [path.join(__dirname, "stage.cjs")], {
-		stdio: "inherit",
-		cwd: platformRoot,
-	});
-	if (stageResult.status !== 0) {
-		exitCode = stageResult.status === null ? 1 : stageResult.status;
-		throw new Error("[buildapk] stage 실패.");
-	}
+	stage(path.join(projectRoot, "build", "web"), path.join(platformRoot, "www"), null);
 
 	const capacitorCommand = isWindows ? "npx.cmd" : "npx";
 	const syncResult = spawnSync(capacitorCommand, ["cap", "sync", "android"], {

@@ -16,7 +16,7 @@
 `launcher.html` 을 Live Server 로 열면 `launcher.js` 가 `src/main.js` 를 동적 import 하여 실행한다.
 
 - VS Code 디버그 구성: `Debug Local Live Server`
-- 기본 URL: `http://127.0.0.1:5501/launcher.html`
+- 기본 URL: `http://127.0.0.1:6001/launcher.html`
 
 
 # 기본 빌드

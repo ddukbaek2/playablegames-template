@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"scripts": {
-		"stage": "node tools/stage.cjs",
+		"stage": "node ../../libs/vanilla.js/tools/project.cjs stage --source ../../build/web --destination www",
 		"sync": "npm run stage && cap sync android",
 		"open": "cap open android",
 		"build:aab": "node tools/buildaab.cjs",
