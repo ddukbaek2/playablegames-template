@@ -1,3 +1,18 @@
+# Build output
+build/
+
+# Platform artifacts (generated)
+platforms/appintoss/public/
+platforms/appintoss/dist/
+platforms/appintoss/*.ait
+platforms/onestore/www/
+platforms/onestore/android/app/build/
+platforms/onestore/android/build/
+platforms/onestore/android/.gradle/
+platforms/onestore/android/local.properties
+platforms/onestore/*.keystore
+platforms/onestore/keystore.properties
+
 # Logs
 logs
 *.log

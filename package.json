@@ -1,0 +1,30 @@
+{
+	"name": "playablegames-template",
+	"version": "1.0.0",
+	"description": "플레이어블 게임 단일 프로젝트 템플릿",
+	"main": "src/main.js",
+	"scripts": {
+		"build": "node libs/vanilla.js/tools/project.cjs build --script src/main.js --input . --output build/web",
+		"check": "node libs/vanilla.js/tools/project.cjs check --input .",
+		"stage:ait": "npm run stage --prefix platforms/appintoss",
+		"dev:ait": "npm run dev --prefix platforms/appintoss",
+		"build:ait": "npm run build --prefix platforms/appintoss",
+		"stage:onestore": "npm run stage --prefix platforms/onestore",
+		"sync:onestore": "npm run sync --prefix platforms/onestore",
+		"open:onestore": "npm run open --prefix platforms/onestore",
+		"build:aab:onestore": "npm run build:aab --prefix platforms/onestore",
+		"build:apk:onestore": "npm run build:apk --prefix platforms/onestore"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ddukbaek2/playablegames-template.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"devDependencies": {},
+	"dependencies": {
+		"canvas": "^3.2.3"
+	}
+}

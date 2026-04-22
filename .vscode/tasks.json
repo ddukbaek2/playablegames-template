@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build",
+			"type": "shell",
+			"command": "npm run build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Assets",
+			"type": "shell",
+			"command": "npm run check",
+			"group": "none",
+			"problemMatcher": []
+		},
+		{
+			"label": "​Packaging AIT",
+			"type": "shell",
+			"command": "npm run build && npm run build:ait",
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "​​Packaging Onestore AAB",
+			"type": "shell",
+			"command": "npm run build && npm run build:aab:onestore",
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "​​Packaging Onestore APK",
+			"type": "shell",
+			"command": "npm run build && npm run build:apk:onestore",
+			"group": "build",
+			"problemMatcher": []
+		}
+	]
+}

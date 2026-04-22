@@ -1,0 +1,20 @@
+{
+	"name": "playablegames-template-appintoss",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"stage": "node tools/stage.cjs",
+		"dev": "npm run stage && granite dev",
+		"build": "npm run stage && ait build",
+		"preview": "vite preview",
+		"deploy": "ait deploy"
+	},
+	"devDependencies": {
+		"typescript": "~6.0.2",
+		"vite": "^8.0.4"
+	},
+	"dependencies": {
+		"@apps-in-toss/web-framework": "^2.4.7"
+	}
+}
