@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 //==============================================================================
 // capacitor.config.json 에 남아있는 <...> 플레이스홀더를 감지하여 빌드를 중단.
-// 사용자가 본인 앱 정보로 대체하지 않은 채 빌드/스테이지가 진행되는 것을 방지한다.
+// 정상 경로는 루트의 `node tools/manifest.cjs ...` 래퍼가 매니페스트 값을
+// 임시 치환한 후 이 스크립트를 호출하는 것이며, 이 시점에는 플레이스홀더가
+// 모두 채워져 있어야 한다. 플랫폼 디렉토리에서 직접 빌드를 시도한 경우에만
+// 이 에러가 발생한다.
 //==============================================================================
 "use strict";
 const fs = require("fs");
@@ -23,8 +26,9 @@ if (remaining.length > 0) {
 	console.error("[validate] capacitor.config.json 에 미설정 플레이스홀더가 남아있습니다.");
 	console.error(`  파일: ${configPath}`);
 	console.error(`  남은 토큰: ${remaining.join(", ")}`);
-	console.error("  다음 값을 실제 앱 정보로 수정하세요:");
-	console.error("    - appId                  (예: com.mycompany.myapp)");
-	console.error("    - appName                (사용자에게 보일 앱 이름)");
+	console.error("  다음 중 하나로 해결하세요:");
+	console.error("    1) 루트에서 'npm run stage:onestore / sync:onestore / build:aab:onestore / build:apk:onestore' 실행 (권장)");
+	console.error("       → project-manifest.json 의 onestore 섹션 값이 자동 적용됨");
+	console.error("    2) project-manifest.json 의 onestore 섹션을 실제 값으로 채우기");
 	process.exit(1);
 }

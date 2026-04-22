@@ -33,33 +33,42 @@ npm install
 수동으로 전체 재설치가 필요하면 `npm run install:all` 을 사용한다.
 
 
-## 플랫폼 빌드 전 필수 설정
+## 플랫폼 빌드 전 필수 설정 — `project-manifest.json`
 
-플랫폼별 식별자는 앱마다 다르므로, `<...>` 로 표기된 플레이스홀더 값을 반드시 실제 값으로 교체해야 한다. 플레이스홀더가 남아있으면 빌드/스테이지 단계에서 `validate` 스크립트가 에러를 내며 중단된다.
+플랫폼별 식별자는 앱마다 다르므로, 루트의 **`project-manifest.json`** 한 곳에 모아서 관리한다. 빌드/스테이지 명령 실행 시 `tools/manifest.cjs` 래퍼가 이 매니페스트 값을 각 플랫폼 config(`granite.config.ts`, `capacitor.config.json`)의 `<token>` 플레이스홀더에 임시로 치환한 뒤 빌드를 수행하고, **종료 시 원본 config 를 복원**한다. 즉, 커밋된 config 파일은 언제나 `<...>` 플레이스홀더를 유지한다.
 
-### 앱인토스 (`platforms/appintoss/granite.config.ts`)
-```ts
-appName: "<appName>",              // 앱인토스에서 부여받은 appName
-brand: {
-    displayName: "<displayName>",  // 사용자에게 보일 앱 이름
-    primaryColor: "#3182F6",
-    icon: "<icon>",                // 아이콘 이미지 경로 (예: "assets/icons/app_icon.png")
-},
-```
-
-### 원스토어 (`platforms/onestore/capacitor.config.json`)
+`project-manifest.json` 초기 내용:
 ```json
 {
-    "appId": "<appId>",            // 예: "com.mycompany.myapp"
-    "appName": "<appName>"         // 사용자에게 보일 앱 이름
+    "appintoss": {
+        "appName": "<appName>",
+        "displayName": "<displayName>",
+        "icon": "<icon>"
+    },
+    "onestore": {
+        "appId": "<appId>",
+        "appName": "<appName>"
+    }
 }
 ```
 
-원스토어는 추가로:
+각 값의 의미:
+
+| 섹션 | 키 | 예시 | 설명 |
+|---|---|---|---|
+| `appintoss` | `appName` | `aftertime-ait-myapp` | 앱인토스에서 부여받은 appName |
+| `appintoss` | `displayName` | `내 게임` | 사용자에게 노출될 앱 이름 |
+| `appintoss` | `icon` | `assets/icons/app_icon.png` | 앱 아이콘 이미지 경로 |
+| `onestore` | `appId` | `com.mycompany.myapp` | 안드로이드 앱 ID |
+| `onestore` | `appName` | `내 게임` | 사용자에게 노출될 앱 이름 |
+
+매니페스트 값에 `<...>` 가 남아있으면 치환 후 검증 단계에서 에러와 함께 중단된다.
+
+### 원스토어 추가 조건
 - Android SDK + JDK 17+ 설치
 - 서명 키스토어 + `android/app/keystore.properties` 배치
 
-> `android/` 스캐폴드는 `build:aab:onestore` / `build:apk:onestore` 첫 실행 시 자동으로 `npx cap add android` 가 수행되어 생성된다. 단, 이때 `capacitor.config.json` 의 `<appId>` / `<appName>` 이 이미 실제 값으로 교체돼 있어야 한다(플레이스홀더가 남아있으면 `validate` 가 먼저 중단시킴).
+> `android/` 스캐폴드는 `build:aab:onestore` / `build:apk:onestore` 첫 실행 시 자동으로 `npx cap add android` 가 수행되어 생성된다. 이때도 매니페스트 값이 먼저 치환된 뒤 실행되므로 올바른 `appId` 로 네이티브 프로젝트가 초기화된다.
 
 
 ## 개발 서버 (Live Server)
