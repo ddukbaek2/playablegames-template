@@ -91,7 +91,13 @@ try {
 	// gradle.properties 에 Android Studio 번들 JBR(JDK 17) 경로 지정.
 	// 시스템 JAVA_HOME 이 구버전(예: JDK 11)이더라도 Gradle 빌드는 JDK 17 로 수행되도록 강제.
 	const gradlePropertiesPath = path.join(androidDirectory, "gradle.properties");
-	const jbrPath = "C:/Program Files/Android/Android Studio/jbr";
+	let jbrPath = "";
+	if (process.platform === "win32") {
+		jbrPath = "C:/Program Files/Android/Android Studio/jbr";
+	}
+	else if (process.platform === "darwin") {
+		jbrPath = "/Applications/Android Studio.app/Contents/jbr/Contents/Home";
+	}
 	if (fileSystem.existsSync(gradlePropertiesPath)) {
 		const gradleProperties = fileSystem.readFileSync(gradlePropertiesPath, "utf8");
 		if (!gradleProperties.includes("org.gradle.java.home")) {
