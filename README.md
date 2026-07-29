@@ -229,6 +229,29 @@ npm run webm -- <폴더경로>
 npm run mangle -- <입력파일> <출력파일> [추가제외이름...]
 ```
 
+헤드리스 브라우저 검증 (`tools/verify.cjs` — 정적 서버 + puppeteer-core 헬퍼):
+
+```bash
+# 게임을 띄워 일정 시간 뒤 캔버스 스크린샷 저장 (puppeteer-core 설치 필요)
+node tools/verify.cjs [대기초] [출력파일]
+```
+
+
+## src/game 재사용 유틸
+
+pipemania 개발에서 검증된 패턴을 게임 비종속 형태로 추린 모듈들. 각 파일 상단 주석에 권장 사용 패턴이 있다.
+
+| 모듈 | 내용 |
+|---|---|
+| `safearea.js` | 안전영역(env(safe-area-inset-*)) 측정·콘텐츠 크기 보정 |
+| `appexit.js` | 게임 종료 (네이티브 = App.exitApp, 웹 = 창 닫기 시도) |
+| `viewscale.js` | 종횡비 기반 뷰 스케일 모드 자동 선택 — **씬 진입 직후 호출 필수** |
+| `audio.js` | 오디오 제스처 정책 (네이티브 = 즉시, 웹 = 첫 제스처에서 해제) |
+| `ui.js` | 캔버스 UI: 나인슬라이스·3상태 버튼·아이콘 버튼·토스트·자동 개행 텍스트 (자산은 세터 주입, 미주입 시 색 사각형 폴백) |
+| `scrollview.js` | 세로 탄성 스크롤(러버밴딩·관성·스프링)·가로 스냅 페이지 + 탭 판정 |
+| `tap.js` | 탭 트래커 (누름-이동-뗌 매칭을 일관 판정) |
+| `datatable.js` | 데이터 테이블(JSON) 로더 — `cache: "no-cache"` 재검증 |
+
 
 ## 자산 구조
 

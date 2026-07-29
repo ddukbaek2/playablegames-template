@@ -8,8 +8,9 @@ import { Colors } from "../libs/vanilla.js/src/base/colors.js";
 import { Engine, EngineConfiguration } from "../libs/vanilla.js/src/core/engine.js";
 import { Graphic } from "../libs/vanilla.js/src/core/graphic.js";
 import { Scene } from "../libs/vanilla.js/src/core/scene.js";
-import { ViewScaleMode } from "../libs/vanilla.js/src/core/viewmanager.js";
 import { getSafeAreaInsetTop, getContentViewSize } from "./game/safearea.js";
+import { applyAspectViewScaleMode } from "./game/viewscale.js";
+import { initializeAudioUnlock } from "./game/audio.js";
 
 
 //==============================================================================
@@ -25,8 +26,26 @@ class MainScene extends Scene {
 	initialize(engine) {
 		super.initialize(engine);
 
+		// 뷰 스케일 모드를 첫 프레임부터 종횡비에 맞게 적용한다. (자세한 사용법은 game/viewscale.js 참고)
 		const viewManager = engine.getViewManager();
-		viewManager.setViewScaleMode(ViewScaleMode.stretchHeight);
+		applyAspectViewScaleMode(viewManager);
+
+		// 오디오 제스처 정책: 네이티브 = 즉시 허용, 웹 = 첫 제스처에서 해제. (game/audio.js 참고)
+		initializeAudioUnlock(engine);
+	}
+
+	//==============================================================================
+	// 화면 크기 변경됨. (회전·창 크기 변화 시 종횡비 기반 모드 재적용)
+	//==============================================================================
+	/**
+	 * @param { Vector2 } canvasNativeSize
+	 */
+	resize(canvasNativeSize) {
+		super.resize(canvasNativeSize);
+
+		const engine = this.getEngine();
+		const viewManager = engine.getViewManager();
+		applyAspectViewScaleMode(viewManager);
 	}
 
 	//==============================================================================
